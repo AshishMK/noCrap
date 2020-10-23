@@ -1,0 +1,56 @@
+<resources>
+    <plurals name="views">
+        <item quantity="one">view</item>
+        <item quantity="other">views</item>
+    </plurals>
+    <plurals name="likes">
+        <item quantity="one">like</item>
+        <item quantity="other">likes</item>
+    </plurals>
+    <!-- Play Icon -->
+
+    <!-- Pause Icon -->
+
+    <!-- Path Name -->
+    <string name="invite_message">"A great app for video and image content, Download it from here https://play.google.com/store/apps/details?id=com.x.nocrap"</string>
+    <string name="update">Update</string>
+    <string name="update_app_title">Update app</string>
+    <string name="no">No</string>
+    <string name="info_dialog_title">Work in Progress :)</string>
+    <string name="info_dialog_msg">We are working on some great feature of the app. Will release ASAP.\nTHANKS</string>
+    <string name="update_app_msg">This version of app is obsolete now and cant\' be use any more. Please update your app.</string>
+    <string name="update_app_msg2">New version of this app with more features and improved performance is available. Please update now.</string>
+    <string name="val_sel_item">Please select at least one item</string>
+    <string name="report_video">Report Content</string>
+    <string name="remove_like">Remove from Likes?</string>
+    <string name="remove_like_msg">Do you want to remove this content from your likes. </string>
+    <string name="report_video_msg">Tell us why do you want to report this content.\nPlease add you\'r Email if necessary.</string>
+    <string name="wait_reporet">Please wait, Video hasn\'t loaded yet</string>
+    <string name="done">Done</string>
+    <string name="point1">The paw tab shows videos related to Animals and Nature.</string>
+    <string name="point2">The footprint tab shows videos related to Humans, Science etc.</string>
+    <string name="point3">The Lotus(Flower) tab shows Images that amaze you.</string>
+    <string name="point4">The heart icon is for liking the content. You can see your liked content on liked list later.</string>
+    <string name="point5">The Up-Arrow shows the details about content like Title, Likes, Views and the creditor info.</string>
+    <string name="credits">Credits</string>
+    <string name="finish">Finish</string>
+    <string name="walk_through_title"> A little introduction to the App</string>
+    <string name="walk_through_subtitle"> Below are some instructions will help you to get familiar with the app functionality more easily. </string>
+    <string name="no_network">We\'ve lost..Check Your Network &amp; RETRY</string>
+    <string name="ok">OK</string>
+    <string name="ok_cancel_download">Cancel Download</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="silent_notification">Silent Notification</string>
+    <string name="silent_notification_msg">Enable notification with no sound</string>
+    <string name="notification_channel">All Notification</string>
+    <string name="notification_channel_msg">Enable All Notification for the app</string>
+    <string name="storage_permission_msg">Please provide storage permission to use this functionality</string>
+    <string name="dont_show_again">Do not show this message again</string>
+    <string name="dont_show_again_notif">dont_show_again_notif</string>
+    <string name="loading">Incoming... Content You\'ve Liked</string>
+    <string name="loading_more">Loading More Items</string>
+    <string name="success">Complete</string>
+    <string name="no_item_found">Go...Watch &amp; Like\nTo List Your Favorite Content Here </string>
+    <string name="no_connection">R U there?\nCheck your connection</string>
+</resources>

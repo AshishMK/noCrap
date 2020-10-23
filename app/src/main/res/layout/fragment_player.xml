@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="PlayerFragmentBinding">
+
+        <variable
+            name="thumb"
+            type="java.lang.String" />
+
+
+        <variable
+            name="img"
+            type="java.lang.String" />
+
+        <variable
+            name="isdummyFrag"
+            type="androidx.databinding.ObservableBoolean" />
+
+        <variable
+            name="isImage"
+            type="androidx.databinding.ObservableBoolean" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="content"
+            type="com.x.nocrap.scenes.homeScene.VideoEntity" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/playerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{isImage?View.GONE:View.VISIBLE}"
+                app:controller_layout_id="@layout/custom_exo" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                android:visibility="@{thumb == null ? View.GONE : View.VISIBLE}"
+                app:profileImage="@{thumb}" />
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/photo_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:elevation="2dp"
+                android:visibility="@{isImage?View.VISIBLE:View.GONE}"
+                app:profileImageNoQ="@{img}" />
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

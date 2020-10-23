@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="AlertDialogBinding">
+
+        <import type="android.view.View" />
+
+        <variable
+            name="title"
+            type="androidx.databinding.ObservableField&lt;java.lang.String>" />
+
+        <variable
+            name="fileProgress"
+            type="androidx.databinding.ObservableInt" />
+
+        <variable
+            name="preferenceStorage"
+            type="com.x.nocrap.data.local.pref.SharedPrefStorage" />
+
+        <variable
+            name="content"
+            type="com.x.nocrap.utils.AlertDialogProvider" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="40dp"
+        android:background="@drawable/custom_dialog_border"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center"
+            android:text="@{title}"
+            android:textColor="@color/text_color_pri"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="serif"
+            android:visibility="visible"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvmessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:fontFamily="sans-serif"
+            android:text="@{content.message}"
+            android:textColor="@color/text_color_pri"
+            android:textSize="14sp"
+            android:typeface="sans"
+            android:visibility="@{(content.dialog_type == content.Companion.TYPE_NORMAL || content.dialog_type == content.Companion.TYPE_UPDATE_FORCE || content.dialog_type == content.Companion.TYPE_UPDATE ? View.VISIBLE: View.GONE)}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+
+            />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/dont_show_again"
+            android:textColor="@color/text_color_pri"
+            android:typeface="sans"
+            android:visibility="@{(content.dialog_type == content.Companion.TYPE_NORMAL_DONT ? (((Boolean)preferenceStorage.readValue(@string/dont_show_again_notif,false))?View.VISIBLE:View.GONE):View.GONE)}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvmessage" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/rounded_corner_edit_text"
+            android:fontFamily="sans-serif"
+            android:gravity="top"
+            android:hint="@{content.message}"
+            android:lineSpacingMultiplier="1.2"
+            android:minLines="@{content.dialog_type == content.Companion.TYPE_EDIT_BIG ? 4 : 1}"
+            android:paddingLeft="@dimen/keyline_1_minus_8dp"
+            android:paddingTop="12dp"
+            android:paddingRight="@dimen/keyline_1_minus_8dp"
+            android:paddingBottom="12dp"
+            android:textColor="@color/text_color_pri"
+            android:textColorHint="@color/hint_text"
+            android:textSize="14sp"
+            android:typeface="sans"
+            android:visibility="@{(content.dialog_type == content.Companion.TYPE_EDIT || content.dialog_type == content.Companion.TYPE_EDIT_BIG || content.dialog_type == content.Companion.TYPE_EDIT_LINK ? View.VISIBLE:View.GONE)}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:clickable="true"
+            android:paddingBottom="8dp"
+            android:visibility="@{(content.dialog_type == content.Companion.TYPE_LIST || content.dialog_type == content.Companion.TYPE_MULTI_LIST ? View.VISIBLE:View.GONE)}"
+            app:layout_constraintBottom_toTopOf="@+id/done"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/done"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginBottom="@dimen/keyline_1"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:onClick="@{content::onDoneClickListener}"
+            android:paddingStart="@dimen/keyline_1"
+            android:paddingEnd="@dimen/keyline_1"
+            android:text="@string/done"
+            android:textColor="@color/text_color_pri"
+            android:visibility="@{content.dialog_type == content.Companion.TYPE_MULTI_LIST ? View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="tvmessage,checkBox,editText" />
+
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/selectableItemBackground"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:onClick="@{content::onDialogCancel}"
+            android:text="@string/cancel"
+            android:textAllCaps="true"
+
+            android:textColor="@color/text_color_pri"
+            android:textSize="13sp"
+            android:typeface="sans"
+            android:visibility="@{(content.dialog_type == content.Companion.TYPE_LIST || content.dialog_type == content.Companion.TYPE_MULTI_LIST || content.dialog_type == content.Companion.TYPE_PROGRESS_DEFINITE || content.dialog_type == content.Companion.TYPE_UPDATE_FORCE ? View.GONE: View.VISIBLE)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/guideline5"
+            app:layout_constraintTop_toBottomOf="@+id/barrier" />
+
+        <TextView
+
+            android:id="@+id/ok"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/selectableItemBackground"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:onClick="@{content::onDialogOk}"
+            android:textAllCaps="true"
+            android:textColor="@color/text_color_pri"
+            android:textSize="13sp"
+            android:typeface="sans"
+            android:visibility="@{(content.dialog_type == content.Companion.TYPE_LIST || content.dialog_type == content.Companion.TYPE_MULTI_LIST || content.dialog_type == content.Companion.TYPE_PROGRESS_DEFINITE ? View.GONE: View.VISIBLE)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/guideline5"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrier" />
+
+        <TextView
+
+            android:id="@+id/cancelDownload"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/selectableItemBackground"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:onClick="@{content::onDialogCancel}"
+            android:text="@{content.dialog_type == content.Companion.TYPE_PROGRESS_DEFINITE  ? @string/ok_cancel_download: @string/ok}"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryButton"
+            android:textSize="13sp"
+            android:typeface="sans"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pb" />
+
+        <View
+            android:id="@+id/dummy"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pb" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".5" />
+
+        <com.x.nocrap.views.progressBar.CircleProgressView
+            android:id="@+id/pb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/keyline_1"
+            android:progress="@{fileProgress}"
+            android:visibility="@{( content.dialog_type == content.Companion.TYPE_PROGRESS_DEFINITE ? View.VISIBLE: View.GONE)}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            app:progressNormalColor="@color/gray"
+            app:progressNormalSize="2dp"
+            app:progressReachColor="@color/colorAccent"
+            app:progressReachSize="2dp"
+            app:progressStyle="Normal"
+            app:radius="28dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

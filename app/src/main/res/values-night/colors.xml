@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/dark_background</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="iconTintColor">@color/dark_icon</color>
+    <color name="text_color_sec">@color/textColorSecDark</color>
+    <color name="heart_red">@color/heart_red_dark</color>
+    <color name="text_color_pri">@color/textColorPriDark</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="back_sec">@color/dark_back_sec</color>
+    <color name="hint_text">@color/hint_text_dark</color>
+    <color name="alert_edit_back">@color/edit_back_dark_alert</color>
+    <color name="mask_back">@color/mask_back_dark</color>
+    <color name="mask_2">@color/dark_mask2</color>
+    <color name="mask_3">@color/dark_mask3</color>
+</resources>

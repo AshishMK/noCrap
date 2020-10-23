@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+
+        <variable
+            name="status"
+            type="com.x.nocrap.data.Status" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:clickable="true"
+
+        android:paddingTop="56dp"
+        android:visibility="@{status == status.SUCCESS ? View.GONE : View.VISIBLE }"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/keyline_1_minus_8dp"
+            android:indeterminate="true"
+            android:visibility="@{status == status.LOADING ? View.VISIBLE : View.GONE }"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+        <!--     <ImageView
+                 android:id="@+id/image"
+                 android:layout_width="100dp"
+                 android:layout_height="100dp"
+                 android:layout_marginBottom="16dp"
+                 android:src="@{status == status.LOADING ? @drawable/wheel : null}"
+                 android:visibility="@{status == status.LOADING ? View.VISIBLE : View.GONE }"
+                 app:layout_constraintBottom_toTopOf="@+id/guideline"
+                 app:layout_constraintLeft_toLeftOf="parent"
+                 app:layout_constraintRight_toRightOf="parent" />
+     -->
+        <ImageView
+
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginBottom="12dp"
+            android:src="@{status == status.NOTFOUND ? @drawable/not_found : @drawable/no_connection}"
+            android:visibility="@{status == status.LOADING ? View.GONE : View.VISIBLE }"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/loadingMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.15"
+            android:text="@{status == status.LOADING ? @string/loading : status == status.SUCCESS ? @string/success : status == status.ERROR ? @string/no_connection: @string/no_item_found}"
+            android:textColor="@color/text_color_pri"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideline" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

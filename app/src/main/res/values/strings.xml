@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">NoCrap</string>
+    <string name="ADMOB_APP_REWARDED_ID">ca-app-pub-1294794800643423/2967537012</string>
+    <string name="ADMOB_APP_ID">ca-app-pub-1294794800643423~1710952209</string>
+    <string name="ADMOB_APP_INTERSTITIAL_ID">ca-app-pub-1294794800643423/1040551134</string>
+    <string name="tag">Puts You in Better Mood</string>
+    <string name="splash_msg">Content Being Ready To Serve</string>
+    <string name="valid_report_text">Please write at least 15 character before post</string>
+    <string name="sending_report">Sending Report</string>
+    <string name="removing">Removing..</string>
+    <string name="sent_report">Report Sent Successfully</string>
+    <string name="my_likes">My Likes</string>
+    <string name="try_again">Action Failed, Please Try Again</string>
+</resources>

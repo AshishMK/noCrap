@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "964089881218",
+    "firebase_url": "https://nocrap-e7474.firebaseio.com",
+    "project_id": "nocrap-e7474",
+    "storage_bucket": "nocrap-e7474.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964089881218:android:081c0494f873ac1035ca9b",
+        "android_client_info": {
+          "package_name": "com.x.nocrap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "964089881218-1uct4l61ih5ksoaoqcf9mrej3em8co2l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.x.nocrap",
+            "certificate_hash": "f89372bb1be6ce062dcb6dcd3410bd9eeba781e3"
+          }
+        },
+        {
+          "client_id": "964089881218-nu9mgvigp9cuc4oiuehk04h7ovatg0nk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.x.nocrap",
+            "certificate_hash": "aeb9a7e6e57a2dd4901697c9ca3b7eddeddc9b7d"
+          }
+        },
+        {
+          "client_id": "964089881218-agrh8pjijmd4fqfairadh9tjvfe9irjm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfrKkZOSzQP6QCD-Y8jC-PDIRLs99YTEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "964089881218-agrh8pjijmd4fqfairadh9tjvfe9irjm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

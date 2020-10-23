@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--4d74a6-->
+
+    <color name="gray_normal">#666667</color>
+    <color name="colorPrimaryButton">#1B82B9</color>
+    <color name="darkGray">#505050</color>
+    <color name="edit_back_light_alert">#D5D1D1</color>
+
+    <color name="gray">#D5D1D1</color>
+    <color name="hint_text_light">#9E9E9E</color>
+    <color name="hint_text_dark">#474646</color>
+    <color name="edit_back_dark_alert">#4752525A</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="white_dull">#ddd</color>
+    <color name="black_dull">#2F2F2F</color>
+    <color name="heart_red_dark">#C6455F</color>
+    <color name="heart_red_light">#FB2B53</color>
+
+    <color name="dark_background">#121212</color>
+
+    <color name="dark_mask3">#00AF9C</color>
+    <color name="dark_mask2">#00AF9C</color>
+
+    <color name="light_mask3">#5478EA</color>
+    <color name="light_mask2">#6484E8</color>
+
+    <color name="mask_back_dark">#F48FB1</color>
+    <color name="mask_back_light">#ff4080</color>
+
+    <color name="light_back_sec">#ffffff</color>
+    <color name="dark_back_sec">#1F1F20</color>
+
+    <color name="dark_icon">#00AF9C</color><!--//#4C75B4-->
+    <!--//#4C75B4-->
+    <color name="textColorSecDark">#959494</color>
+    <color name="textColorPriDark">#C1BFBF</color>
+</resources>

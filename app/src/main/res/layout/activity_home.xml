@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".scenes.homeScene.HomeActivity">
+
+    <data class="HomeActivityBinding">
+
+        <variable
+            name="utils"
+            type="com.x.nocrap.utils.Utils.Companion" />
+
+        <variable
+            name="mediaCat"
+            type="androidx.databinding.ObservableInt" />
+
+        <variable
+            name="themeMode"
+            type="androidx.databinding.ObservableInt" />
+
+        <variable
+            name="showControls"
+            type="androidx.databinding.ObservableBoolean" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="handler"
+            type="com.x.nocrap.scenes.homeScene.HomeActivityHandler" />
+
+        <variable
+            name="entity"
+            type="com.x.nocrap.scenes.homeScene.VideoEntity" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="false">
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/pb_sec"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginBottom="@dimen/keyline_1_minus_8dp"
+                android:indeterminate="true"
+                android:theme="@style/myPBStyle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.x.nocrap.views.HackyViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:fitsSystemWindows="false" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{showControls?View.VISIBLE:View.GONE}">
+
+                <ImageView
+                    android:id="@+id/emotion"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="12dp"
+                    android:src="@{utils.getEmotion(entity.emotion)}"
+                    app:layout_constraintBottom_toTopOf="@+id/trackTitle"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <TextView
+                    android:id="@+id/trackTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:lines="1"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:text="@{entity.title}"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:typeface="sans"
+                    app:layout_constraintBottom_toTopOf="@+id/guideLine" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideLine"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent=".49" />
+
+                <ImageView
+                    android:id="@+id/playPauseMid"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="@dimen/keyline_1_minus_8dp"
+                    android:background="@drawable/circle_white"
+                    android:onClick="@{handler::onPlayPauseClicked}"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_baseline_pause_24"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/guideLine"
+                    app:tint="@color/iconTintColor" />
+
+                <ImageView
+                    android:id="@+id/crop"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="18dp"
+                    android:background="@drawable/circle_white"
+                    android:onClick="@{handler::onVideoCrop}"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_baseline_crop_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/playPauseMid"
+                    app:layout_constraintRight_toLeftOf="@+id/playPauseMid"
+                    app:layout_constraintTop_toTopOf="@+id/playPauseMid"
+                    app:tint="@color/iconTintColor" />
+
+                <ImageView
+                    android:id="@+id/mute"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="18dp"
+                    android:background="@drawable/circle_white"
+                    android:onClick="@{handler::onVolumeClicked}"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_baseline_volume_off_24"
+                    app:layout_constraintBottom_toBottomOf="@+id/playPauseMid"
+
+                    app:layout_constraintLeft_toRightOf="@+id/playPauseMid"
+                    app:layout_constraintTop_toTopOf="@+id/playPauseMid"
+                    app:tint="@color/iconTintColor" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/grup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="playPauseMid,mute,crop" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/colorPrimary"
+                android:visibility="@{showControls?View.VISIBLE:View.GONE}"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/report"
+
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:onClick="@{handler::onReportClicked}"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_edit"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/fullScreen"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/iconTintColor" />
+
+                <ImageView
+                    android:id="@+id/search"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+
+                    android:scaleType="center"
+                    android:src="@drawable/ic_search"
+                    android:visibility="gone"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/fullScreen"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/iconTintColor" />
+
+                <ImageView
+                    android:id="@+id/fullScreen"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:onClick="@{handler::onRotateClicked}"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_rotate"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/report"
+                    app:layout_constraintRight_toLeftOf="@+id/theme"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/iconTintColor" />
+
+                <ImageView
+                    android:id="@+id/theme"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:onClick="@{handler::onThemeChanged}"
+                    android:scaleType="center"
+                    android:src="@{themeMode==0?@drawable/ic_moon:@drawable/ic_sun}"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/fullScreen"
+                    app:layout_constraintRight_toLeftOf="@+id/myLikes"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/iconTintColor" />
+
+                <ImageView
+                    android:id="@+id/myLikes"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:onClick="@{handler::showLikesClicked}"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_couple"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/theme"
+                    app:layout_constraintRight_toLeftOf="@+id/settings"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/iconTintColor" />
+
+                <ImageView
+                    android:id="@+id/settings"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:onClick="@{handler::onSettingsClicked}"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_settings"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@+id/myLikes"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/iconTintColor" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <include
+                android:id="@+id/likeButtonLayout"
+                layout="@layout/view_like_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/splash"
+                layout="@layout/splash"
+                app:handler="@{handler}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.an.trailers.ui.base.custom.loaders.NewtonCradleLoading
+            android:id="@+id/loader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="#90000000"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/bottomSheet"
+            layout="@layout/home_bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{showControls?View.VISIBLE:View.GONE}"
+            app:behavior_hideable="false"
+            app:behavior_peekHeight="56dp"
+            app:entity="@{entity}"
+            app:handler="@{handler}"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+            app:mediaCat="@{mediaCat}"
+            app:utils="@{utils}" />
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

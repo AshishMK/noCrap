@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".scenes.likeScene.MyLikesActivity">
+
+    <data>
+
+        <variable
+            name="utils"
+            type="com.x.nocrap.utils.Utils.Companion" />
+
+        <variable
+            name="entity"
+            type="com.x.nocrap.scenes.homeScene.VideoEntity" />
+
+        <variable
+            name="handler"
+            type="com.x.nocrap.scenes.likeScene.LikeActivityHandler" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomSheet"
+        style="?attr/bottomSheetStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/keyline_1"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="56dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+
+        <ImageView
+            android:id="@+id/report"
+            android:layout_width="48dp"
+            android:layout_height="56dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:onClick="@{handler::onReportClicked}"
+            android:scaleType="center"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/rotate"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/iconTintColor" />
+
+        <ImageView
+            android:id="@+id/rotate"
+            android:layout_width="48dp"
+            android:layout_height="56dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:onClick="@{handler::onRotateClicked}"
+            android:scaleType="center"
+            android:src="@drawable/ic_rotate"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/report"
+            app:layout_constraintRight_toLeftOf="@+id/swipe"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/iconTintColor" />
+
+        <ImageView
+            android:id="@+id/swipe"
+            android:layout_width="48dp"
+            android:layout_height="56dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:onClick="@{handler::onSlideClicked}"
+            android:scaleType="center"
+            android:src="@drawable/ic_up_arrow"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@+id/rotate"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/iconTintColor" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyline_1"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="@dimen/keyline_1"
+            android:fontFamily="sans-serif-light"
+            android:text="@{entity.title}"
+            android:textColor="@color/text_color_pri"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="sans"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/views"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyline_1"
+            android:layout_marginTop="@dimen/keyline_0_plus_4_dp"
+            android:layout_marginEnd="@dimen/keyline_1"
+            android:fontFamily="sans-serif"
+            android:text="@{(entity.likes == 0 ? @string/no+` ` + @plurals/likes(0) : utils.getNumberQuantifier(entity.likes) + ` `+  @plurals/likes(entity.likes))+` &amp; ` +(entity.views == 0 ? @string/no+` ` + @plurals/views(0) : utils.getNumberQuantifier(entity.views) + ` `+  @plurals/views(entity.views))}"
+            android:textColor="@color/text_color_sec"
+            android:textSize="14sp"
+            android:typeface="sans"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyline_1"
+            android:layout_marginTop="@dimen/keyline_1"
+            android:layout_marginEnd="@dimen/keyline_1"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/credits"
+            android:textColor="@color/text_color_pri"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:typeface="sans"
+            app:layout_constraintTop_toBottomOf="@+id/views" />
+
+        <TextView
+            android:id="@+id/descriptionDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyline_1"
+            android:layout_marginTop="@dimen/keyline_0_plus_4_dp"
+            android:layout_marginEnd="@dimen/keyline_1"
+            android:fontFamily="sans-serif"
+            android:text="@{entity.description}"
+            android:textColor="@color/text_color_sec"
+            android:textSize="14sp"
+            android:typeface="sans"
+            app:layout_constraintTop_toBottomOf="@+id/description" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
