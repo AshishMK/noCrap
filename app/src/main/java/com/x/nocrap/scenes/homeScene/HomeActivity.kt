@@ -138,7 +138,6 @@ class HomeActivity : AppCompatActivity(), HomeActivityHandler {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-
         themeMode.set(UserManager.getThemeMode(preferenceStorage))
         if (themeMode.get() == 1)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -149,7 +148,13 @@ class HomeActivity : AppCompatActivity(), HomeActivityHandler {
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )*/
+        ///***on memory leak when system destroy activity fragments in pageradapter remain still in memory so we are removing them here*/
+        for (fragment in supportFragmentManager.fragments) {
+            supportFragmentManager.beginTransaction().remove(fragment).commit()
+        }
+        Toast.makeText(this@HomeActivity, "iew model" + (pagerAdapter == null), 0).show()
         pagerAdapter = PagerAdapter(supportFragmentManager)
+
         initialiseView()
         initialiseViewModel()
         loadAd()
@@ -270,6 +275,7 @@ class HomeActivity : AppCompatActivity(), HomeActivityHandler {
 
         loginViewModel =
             ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
+
         loginViewModel.getUserLiveData().observe(this, Observer { resource ->
             if (resource!!.isLoading) {
                 showSplashStatus(Status.LOADING)
@@ -309,6 +315,7 @@ class HomeActivity : AppCompatActivity(), HomeActivityHandler {
             } else if (resource.data?.data != null) {
                 showSplashStatus(Status.SUCCESS)
                 //updateMoviesList(resource.data)
+
                 binding.splash.splash.visibility = View.GONE
                 println("loginin loading " + loginViewModel.getContentLiveData().value!!.data!!.data!!.size)
                 //pagerAdapter.addFragDummy(new PlayerFragment(), "tst");
@@ -362,11 +369,9 @@ class HomeActivity : AppCompatActivity(), HomeActivityHandler {
             val uniqueID: String = UUID.randomUUID().toString()
             loginViewModel.loginUser(uniqueID, "$uniqueID@g.com", "")
         } else {
-            loginViewModel.getVideos(
-                mediaCategory.ordinal,
-                if (pagerAdapter == null) 0 else pagerAdapter!!.count
-            )
-            println("loginin id")
+            mediaCatXml.set(0)
+            getVideo()
+
         }
     }
 
@@ -459,15 +464,25 @@ class HomeActivity : AppCompatActivity(), HomeActivityHandler {
         getVideo()
     }
 
-    fun getVideo() {
+    private fun getVideo() {
+        Toast.makeText(
+            this@HomeActivity,
+            "get video " + initialized + " " + ((concatenatedSource == null)),
+            1
+        ).show()
         lastIndex = 0;
+
         simpleExoPlayer.videoScalingMode = C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
         simpleExoPlayer.playWhenReady = false
         if (pagerAdapter != null) {
             pagerAdapter!!.removePages()
         }
-        concatenatedSource?.clear()
-        loginViewModel.getVideos(mediaCategory.ordinal, 0)
+        if (concatenatedSource != null)
+            concatenatedSource?.clear()
+        loginViewModel.getVideos(
+            mediaCategory.ordinal,
+            if (pagerAdapter == null) 0 else pagerAdapter!!.count
+        )
     }
 
     override fun onImageClicked(view: View) {
@@ -657,6 +672,7 @@ class HomeActivity : AppCompatActivity(), HomeActivityHandler {
         setPageValues(0, toggleControl = true, afterLoadFirstTime = true)
     }
 
+
     fun setPageValues(
         position: Int,
         toggleControl: Boolean,
@@ -717,6 +733,7 @@ class HomeActivity : AppCompatActivity(), HomeActivityHandler {
             pagerAdapter!!.notifyDataSetChanged()
             //}
         }
+        Toast.makeText(this@HomeActivity, "ll " + pagerAdapter!!.count, 0).show()
         //LoopingMediaSource loopingSources = new LoopingMediaSource(secondSource);
         if (concatenatedSource == null) {
             concatenatedSource = ConcatenatingMediaSource(*tmp)

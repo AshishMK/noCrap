@@ -1,5 +1,6 @@
 package com.x.nocrap.scenes.homeScene
 
+import android.os.Parcelable
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -28,6 +29,14 @@ class PagerAdapter(manager: FragmentManager) : FragmentStatePagerAdapter(manager
         return list1
     }
 
+    override fun restoreState(state: Parcelable?, loader: ClassLoader?) {
+        try {
+            super.restoreState(state, loader)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
     override fun getItemPosition(`object`: Any): Int {
         return androidx.viewpager.widget.PagerAdapter.POSITION_NONE
     }
@@ -49,6 +58,7 @@ class PagerAdapter(manager: FragmentManager) : FragmentStatePagerAdapter(manager
         mFragmentTitleList.removeAt(mFragmentTitleList.size - 1)
         notifyDataSetChanged()
     }
+
 
     /*public boolean isDummyFrag(int position) {
     return  hasDummyFrag && position == mFragmentList.size() -1 && position == list.size() ;
@@ -95,4 +105,5 @@ class PagerAdapter(manager: FragmentManager) : FragmentStatePagerAdapter(manager
     override fun getPageTitle(position: Int): CharSequence? {
         return mFragmentTitleList[position]
     }
+
 }
